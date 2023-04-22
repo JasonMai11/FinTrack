@@ -4,6 +4,9 @@ import { auth } from "../firebase";
 import { Link } from "react-router-dom";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
+import { useNavigate } from "react-router-dom";
+
+
 import "../styles/LoginForm.scss";
 
 
@@ -11,11 +14,13 @@ const LoginForm = () => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-
+  
     try {
       let email = identifier;
       if (!email.includes("@")) {
@@ -30,12 +35,15 @@ const LoginForm = () => {
           return;
         }
       }
-
+  
       await signInWithEmailAndPassword(auth, email, password);
+      // Redirect to the /dashboard page after successful login
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message);
     }
   };
+  
 
   return (
     <div className="login-container">

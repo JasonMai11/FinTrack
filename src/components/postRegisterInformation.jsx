@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
+
+import "../styles/PostRegisterInformation.scss";
+
 
 const PostRegisterInformation = () => {
   const [firstName, setFirstName] = useState("");
@@ -61,8 +64,8 @@ const PostRegisterInformation = () => {
         }
   
         // Redirect to the main page or the user's dashboard
-        console.log("Navigating to /dashboard");
-        navigate("/dashboard");
+        console.log("Navigating to /required-information");
+        navigate("/required-information");
       } else {
         console.log("User is not logged in.");
       }
@@ -75,46 +78,52 @@ const PostRegisterInformation = () => {
   
 
   const handleSkip = () => {
-    navigate("/dashboard");
+    navigate("/required-information");
   };
 
   return (
-    <div>
+    <div className="post-registration-container">
       {loggedIn && (
         <>
           <h2>Post Registration Information</h2>
           <p>Logged in as: {email}</p>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="post-registration-form">
             <input
               type="text"
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              className="post-registration-input"
             />
             <input
               type="text"
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              className="post-registration-input"
             />
             <input
               type="date"
               placeholder="Date of Birth"
               value={dateOfBirth}
               onChange={(e) => setDateOfBirth(e.target.value)}
+              className="post-registration-input"
             />
             <button
               type="submit"
-              disabled={!firstName || !lastName || !dateOfBirth}
+              disabled={!firstName || !lastName || !dateOfBirth }
+              className="post-registration-button"
             >
               Continue
             </button>
           </form>
-          <button onClick={handleSkip}>Skip</button>
+          <button onClick={handleSkip} className="post-registration-button-skip">Skip</button>
         </>
       )}
     </div>
   );
 };
+
+
 
 export default PostRegisterInformation;
