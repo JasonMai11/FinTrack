@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/RegisterForm.scss";
 
 
@@ -14,14 +15,11 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -29,10 +27,14 @@ const RegisterForm = () => {
 
       // Store the username in the user profile
       await updateProfile(user, { displayName: username });
+
+      // Redirect to the PostRegisterInformation component
+      navigate("/post-register-information");
     } catch (error) {
       setError(error.message);
     }
   };
+
 
   return (
     <div className="container">
