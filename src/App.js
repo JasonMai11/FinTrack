@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import LoginPage from "./components/LoginForm";
 import RegisterPage from "./components/RegisterForm";
 import PostRegisterInformation from "./components/PostRegisterInformation";
+import RequiredInformation from "./components/RequiredInformation";
+import DashBoard from "./components/Dashboard";
 
 const App = () => {
   return (
@@ -12,6 +14,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/post-register-information" element={<PostRegisterInformation/>} />
+        <Route path="/required-information" element={<RequiredInformation/>} />
+        <Route path="/dashboard" element={<DashBoard/>} />
       </Routes>
     </BrowserRouter>
   );
