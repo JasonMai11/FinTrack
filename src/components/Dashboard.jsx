@@ -46,7 +46,29 @@ const Dashboard = () => {
 
     return (
         <>
-            <h2>Welcome {firstName || username}</h2>
+            <h2>{firstName || username}'s Finance Dashboard</h2>
+            <h3 className="Summary-Text">Summary</h3>
+
+            <div className="graph-outlook">
+                
+            </div>
+
+            <div className="balance-container">
+                <p>Balance</p>
+            </div>
+
+            <div className="spent-container">
+                <p>Spent</p>
+            </div>
+
+            <div className="recurring-container">
+                <p>Recurring Subscriptions</p>
+            </div>
+
+            <div className="transaction-container">
+
+            </div>
+
         </>
     );
 
